@@ -1,0 +1,19 @@
+alias   ls='/bin/ls --color=auto'
+# alias ls='/bin/ls -G'
+
+alias   ll='/bin/ls -lF --color=auto'
+# alias ll='/bin/ls -lFG'
+
+alias lll='/bin/ls -alF --color=auto'
+
+alias  ii='export QT_QPA_PLATFORM='offscreen';ipython'
+alias  nb='jupyter notebook'
+alias  jj='jupyter lab'
+
+alias fg='find ./ -type f -print | grep --color -P '
+alias fxg='find ./ -type f -print | xargs grep --color -P '
+
+# find big files (skip files smaller than 4 MB)
+alias fb="du -sm * | grep -v '^(0|1|2|3)\s+' | sort -V"
+
+alias uedit='open -a UltraEdit'

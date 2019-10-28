@@ -1,0 +1,139 @@
+Initial installation
+Standard software (including MS Office)
+User account, network access, WiFi, iCloud Account
+
+========================================================
+Commercial Software - total ~$180. 
+========================================================
+BBEdit $49.99
+  https://www.barebones.com/store/download.html
+  To enter License - go to menu BBEdit > License
+========================================================
+UltraEdit for Mac $99.95
+  https://www.ultraedit.com/products/mac-text-editor/
+========================================================
+DeltaWalker for Mac $59.95 (compare files / directores)
+  https://www.deltawalker.com/
+========================================================
+Memory Clean $9.99
+  https://fiplab.com/apps/memory-clean-for-mac
+========================================================
+DaisyDisk $9.99
+  https://itunes.apple.com/us/app/daisydisk/id411643860?mt=12
+========================================================
+Uberlayer $3.99
+  https://itunes.apple.com/us/app/uberlayer/id510139938?mt=12
+========================================================
+BetterSnapTool $2.99
+  https://itunes.apple.com/us/app/bettersnaptool/id417375580?mt=12
+========================================================
+FreeSpace $0.99
+  https://itunes.apple.com/us/app/freespace/id457520846?mt=12
+
+========================================================
+Free software 
+========================================================
+Battery Health 2
+  https://itunes.apple.com/us/app/battery-health-2-stats-info/id1120214373?mt=12
+LastPass
+  https://www.lastpass.com/
+Sublime Text:
+  https://www.sublimetext.com/3
+iTerm2
+  https://www.iterm2.com/
+FileZilla
+  https://filezilla-project.org/download.php?platform=osx
+WiFi Explorer Lite
+  https://itunes.apple.com/us/app/wifi-explorer-lite/id1408727408?mt=12
+Scroll Reverser
+  https://pilotmoon.com/scrollreverser/
+Google Chrome
+  https://www.google.com/chrome/
+Firefox
+  https://www.mozilla.org/en-US/firefox/mac/
+SeaMonkey
+  http://www.seamonkey-project.org/releases/
+VLC Video Player
+  https://www.videolan.org/vlc/download-macosx.html
+Adobe Acrobat Reader
+  https://get.adobe.com/reader/
+Blackmagic Disk Speed Test
+  https://itunes.apple.com/us/app/blackmagic-disk-speed-test/id425264550?mt=12
+Oceanaudio
+  http://www.ocenaudio.com/
+MediaHuman Audio Converter
+  https://www.mediahuman.com/audio-converter/
+=====================================
+anaconda python 3.7 - to be installed in user's home directory
+Download terminal installation script from:
+  https://www.anaconda.com/distribution/
+=====================================
+Install Command Line Tools
+Google for: 
+  how to install Command Line Tools macOS
+You will find something like this:
+  http://osxdaily.com/2014/02/12/install-command-line-tools-mac-os-x/
+=====================================
+Homebrew:
+  https://brew.sh/
+
+/usr/bin/ruby -e "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/master/install)"
+
+brew install htop wget grep
+brew install fzf ripgrep bat fd
+brew instal exa
+
+htop - to show CPU and memory usage
+wget - to download things 
+grep - to filter through files or listings
+fzf  - interactively filter its input
+fd   - a replacement to find command
+ripgrep (rg) - replacement to grep
+bat - replacement to cat with colors
+exa - replacement to ls
+
+Also optional:
+brew install imagemagick
+# this install many commands (like "convert") - you can see the list:
+    ls -alF /usr/local/bin | grep imagemagick 
+# Example of mas conversion of images:
+    for file in *.jpg; do convert $file -resize 50% small_${file}; done
+brew install cask
+brew install youtube-dl
+brew search --casks
+=====================================
+for fzf - add these lines to .bashrc
+    export FZF_DEFAULT_COMMAND="fd . $HOME"
+    export FZF_CTRL_T_COMMAND="$FZF_DEFAULT_COMMAND"
+    export FZF_ALT_C_COMMAND="fd -t d . $HOME"
+=====================================
+bat - for light background add the following into .bashrc:
+
+  export BAT_THEME="OneHalfLight"
+=====================================
+exa - for light background add the folloing into .bashrc:
+
+  EXA_COLORS="uu=8;31:ex=8;31:sn=8;34:sb=8;34:di=10;32"
+  EXA_COLORS="$EXA_COLORS:ur=8;31:uw=8;31:ux=8;31:ue=8;31"
+  EXA_COLORS="$EXA_COLORS:gr=8;34:gw=8;34:gx=8;34:tr=8;31:tw=8;31:tx=8;31"
+  export EXA_COLORS
+
+also add the folloing into .bash_aliases
+
+  alias ee='exa -lF'
+  alias eee='exa -lFa'
+  alias ll='exa -lF'
+  alias lll='exa -lFa'
+=====================================
+Mactex (this is 3.42 GB in size) 
+  https://tug.org/mactex/mactex-download.html
+=====================================
+After all software installed, configure:
+  finder
+  touchbar and mouse (Scroll Reverser)
+  UltraEdit
+  iTerm2
+  unix dot files
+  Apple scripts in Finder toolbar
+  ipython startup files and config changes
+=====================================

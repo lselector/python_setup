@@ -1,0 +1,10 @@
+.svn
+.classpath
+.project
+.settings
+target
+*.pyc
+*.swp
+.DS_Store
+.idea
+*.un~

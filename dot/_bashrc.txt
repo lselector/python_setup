@@ -1,0 +1,20 @@
+# ------------------------------------
+# .bashrc for local machine only
+# ------------------------------------
+export PYTHONDONTWRITEBYTECODE=1
+export PROMPT_COMMAND='PS1_PATH=$(sed "s:\([^/\.]\)[^/]*/:\1/:g" <<< ${PWD/#$HOME/\~})'
+export PS1='\u@\h:$PS1_PATH\$ '
+
+if [ -f $HOME/.bash_aliases ] ;
+then
+    source $HOME/.bash_aliases
+fi
+
+export SSHDIR=$HOME/.ssh
+export HISTSIZE=10000
+export HISTFILESIZE=10000
+
+export PATH="$HOME/anaconda3/bin:$PATH"
+
+# source "$HOME/perl5/perlbrew/etc/bashrc"
+# export PATH=".:/usr/local/mysql/bin:$PATH"
