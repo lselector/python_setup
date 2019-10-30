@@ -5,7 +5,7 @@
 # Convenient to use from iPython prompt.
 # Helps to verify data under debugger.
 # Helps to decouple parts of software system
-# (works like internal messenging system).
+# (works like internal messaging system).
 # 
 # note - needs python version 3.3 or higher
 """
