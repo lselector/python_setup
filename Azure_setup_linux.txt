@@ -1,0 +1,349 @@
+# ----------------------------------------------
+https://portal.azure.com
+Support:
+  aka.ms/azureportalsupport
+  (800) 642 7676
+# ----------------------------------------------
+VM1 - myvm1
+
+  Ubuntu Server 18.04 LTS (Long Term Support)
+  16 vcpus 64 GB
+  # -----------------------------------------
+  Username: myadmin
+  create and paste SSH Public key:
+    make sure that you have directory ~/.ssh
+    ssh-keygen -t rsa -b 4096
+    Note: for passphrase - hit <ENTER>
+  Permissions:
+    on server: chmod go-w /home/$USER
+               chmod 700 /home/$USER/.ssh
+    on client: chmod 700 /Users/$USER/.ssh
+               chmod 644 /Users/$USER/.ssh/*
+               chmod 600 /Users/$USER/.ssh/id_rsa
+  add disk:
+    myvm1_DataDisk_0
+  open ports - http, https, ssh
+  Public IP address : write here
+
+  ssh myadmin@myvm1.eastus.cloudapp.azure.com
+
+  alias a1='ssh myadmin@myvm1.eastus.cloudapp.azure.com'
+
+# --------------------------------------------------------------
+
+Add additional 4TB disk
+
+Instructions on how to partition, format, and mount additional disk to VM.
+ - https://www.cyberciti.biz/tips/fdisk-unable-to-create-partition-greater-2tb.html
+
+df -h
+
+show the disks
+   dmesg | grep SCSI
+
+creating partition
+   sudo parted /dev/sdc
+        (parted) mklabel gpt
+        (parted) print all
+        (parted) unit TB
+        (parted) mkpart primary 0.00TB 4.00TB
+        (parted) print
+        (parted) quit
+        Information: You may need to update /etc/fstab.
+
+formatting it:
+   sudo mkfs.ext4 /dev/sdc
+
+Mounting it:
+   sudo mkdir /data
+   sudo mount /dev/sdc /data
+
+alternatively to "parted" I could've used "gdisk"
+
+# ---------------------------
+
+auto-mount the disk on reboot
+
+To auto-mount the drive upon restart
+we need to edit /etc/fstab
+
+First run this command to get UUID for the disk /dev/sdc:
+
+   sudo blkid | grep /dev/sdc
+     /dev/sdc: UUID="some_long_id" TYPE="ext4"
+
+Now append the following lines into /etc/fstab
+
+# <file system>      <mount point>   <type>  <options>                            <dump>  <pass>
+UUID=some_long_id    /data           ext4    user,errors=remount-ro,auto,exec,rw  0       0
+
+
+You can test with this command:
+
+    sudo mount -a
+
+# --------------------------------------------------------------
+
+remove welcome banner when login-ing into VM server:
+
+    cd /etc/update-motd.d
+    sudo chmod -x *
+    sudo chmod +x 98-reboot-required
+
+# --------------------------------------------------------------
+
+Install Azure CLI on MacOS and Ubuntu
+
+https://docs.microsoft.com/en-us/cli/azure/install-azure-cli?view=azure-cli-latest
+
+MacOS: 
+   brew install azure-cli
+Ubuntu:
+   curl -sL https://aka.ms/InstallAzureCLIDeb | sudo bash
+
+Here how to work with Azure storage:
+   https://docs.microsoft.com/en-us/azure/storage/common/storage-azure-cli
+
+Examples of commands:
+
+  az --help
+  az --version
+  az account list
+  az storage file upload -s $SHARE_NAME/$DIR_NAME --source myfile.txt
+# ----------------------------------------------
+
+SQL Data Warehouse
+
+mysql1
+   user:  myadmin
+   passwd: mypass (two commas at the end)
+
+Performance Level - Gen2: DW100c
+
+server name: mysql1.database.windows.net
+
+Driver={ODBC Driver 13 for SQL Server};Server=tcp:mysql1.database.windows.net,1433;Database=mysql1;Uid=myadmin@mysql1;Pwd={your_password_here};Encrypt=yes;TrustServerCertificate=no;Connection Timeout=30;
+
+# ----------------------------------------------
+
+Microsoft mssql-tools for Mac:
+
+brew tap microsoft/mssql-release https://github.com/Microsoft/homebrew-mssql-release
+
+brew update
+
+brew install msodbcsql mssql-tools
+
+# ----------------------------------------------
+
+Microsoft mssql-tools for Ubuntu Linux:
+
+ - https://docs.microsoft.com/en-us/sql/linux/quickstart-install-connect-ubuntu?view=sql-server-2017
+
+   curl https://packages.microsoft.com/keys/microsoft.asc | sudo apt-key add -
+   curl https://packages.microsoft.com/config/ubuntu/16.04/prod.list | sudo tee /etc/apt/sources.list.d/msprod.list
+   sudo apt-get update 
+   sudo apt-get install mssql-tools unixodbc-dev 
+
+# ----------------------------------------------
+
+Env. and aliases for bcp and sql
+
+from your .bashrc source file .my_azure with the following definitions:
+
+export MSA1="myadmin@myvm1.eastus.cloudapp.azure.com"
+export MSDW="-S mysql1.database.windows.net -U myadmin -P mypass -d mysql1"
+alias a1='ssh myadmin@myvm1.eastus.cloudapp.azure.com'
+alias asql="sqlcmd $MSDW -I"
+alias abcp="bcp tab2 out junk.txt $MSDW -c -t, -q"
+
+Then you can work with Azure Data Warehouse like this:
+
+asql -Q ' select count(1) from tab2'
+Executing SQL commands from file:
+
+asql -i fname.sql
+
+bulk copy (bcp) between file and table:
+
+bcp tab1 in junk.csv $MSDW -c -t, -q 
+bcp tab1 out junk.csv $MSDW -c -t, 
+
+Also you can work from interactive sql prompt by typing command:
+
+asql
+
+https://docs.microsoft.com/en-us/sql/tools/sqlcmd-utility?view=sql-server-2017
+
+# ----------------------------------------------
+
+Install fd-find:
+
+cd /data/SOFT
+wget https://github.com/sharkdp/fd/releases/download/v7.3.0/fd_7.3.0_amd64.deb
+sudo dpkg -i fd_7.3.0_amd64.deb
+which fd
+cd
+fd sql
+
+
+# ----------------------------------------------
+
+Install ripgrep
+
+https://github.com/BurntSushi/ripgrep
+
+cd /data/SOFT
+curl -LO https://github.com/BurntSushi/ripgrep/releases/download/11.0.1/ripgrep_11.0.1_amd64.deb
+sudo dpkg -i ripgrep_11.0.1_amd64.deb
+
+# ----------------------------------------------
+
+install anaconda python
+
+wget https://repo.anaconda.com/archive/Anaconda3-2019.03-Linux-x86_64.sh
+bash Anaconda3-2019.03-Linux-x86_64.sh
+   type-in location: /data/anaconda3
+
+conda config --set auto_activate_base false
+
+conda install tornado=4.5.3
+conda install -c conda-forge xgboost
+conda install pytorch-cpu torchvision-cpu -c pytorch
+conda list | grep tornado
+    tornado                   4.5.3                    py37_0
+pip install simple-salesforce
+conda install gunicorn
+conda install -c conda-forge imbalanced-learn
+
+# ----------------------------------------------
+
+Configure ipython
+
+ipython locate profile
+ipython profile create
+ipython locate profile
+
+add files under .ipython/profile_default/startup/
+   (take them from python_setup repository)
+
+cd /data/anaconda3/
+find ./ -name 'ipython_config.py' -ls
+cp     some_dir/ipython_config.py     ~/.ipython/profile_default/ipython_config.py
+edit file :
+    .ipython/profile_default/ipython_config.py
+
+search and set:
+  c.TerminalInteractiveShell.display_completions = 'readlinelike'
+  c.InteractiveShell.ast_node_interactivity = 'all'
+
+# ----------------------------------------------
+install nginx web server
+  https://mediatemple.net/community/products/developer/204405534/install-nginx-on-ubuntu
+   
+   sudo apt-get install nginx
+   sudo /etc/init.d/nginx start
+
+test:
+   sudo nginx -t
+restart:
+   sudo /etc/init.d/nginx restart
+   or
+   sudo systemctl restart nginx
+# ----------------------------------------------
+SSH Certificate should be provisioned using "Let's Encrypt"
+
+    https://letsencrypt.org/
+
+Following instructions here:
+ - https://certbot.eff.org/lets-encrypt/ubuntubionic-nginx
+
+Add Certbot PPA
+
+sudo apt-get update
+sudo apt-get install software-properties-common
+sudo add-apt-repository universe
+sudo add-apt-repository ppa:certbot/certbot
+sudo apt-get update
+
+Install Certbot
+
+sudo apt-get install certbot python-certbot-nginx
+sudo certbot --nginx
+sudo certbot renew --dry-run
+
+IMPORTANT NOTES:
+ - Congratulations! Your certificate and chain have been saved at:
+   /etc/letsencrypt/live/myvm1.eastus.cloudapp.azure.com/fullchain.pem
+   Your key file has been saved at:
+   /etc/letsencrypt/live/myvm1.eastus.cloudapp.azure.com/privkey.pem
+   Your cert will expire on 2019-09-17. To obtain a new or tweaked
+   version of this certificate in the future, simply run certbot again
+   with the "certonly" option. To non-interactively renew *all* of
+   your certificates, run "certbot renew"
+ - If you like Certbot, please consider supporting our work by:
+
+Note:
+renewal is scheduled in this file:
+
+     /etc/cron.d/certbot
+
+as following command:
+
+0 */12 * * * root test -x /usr/bin/certbot -a \! -d /run/systemd/system && perl -e 'sleep int(rand(43200))' && certbot -q renew
+
+Note that the 6th element in this command is the user name (root). This syntax of files in /etc/cron.d/ directory is a bit different from regular user crontab files.
+
+# ----------------------------------------------
+configure to use jupyter notebook
+
+open inbound ports 8888-8899
+open outgoing ports
+jupyter notebook --generate-config
+the SSL files fullchain.pem  privkey.pem are here:
+/etc/letsencrypt/live/myvm1.eastus.cloudapp.azure.com/
+sudo chmod -R 755 /etc/letsencrypt/live
+sudo chmod -R 755 /etc/letsencrypt/archive
+sudo chmod 644 /etc/letsencrypt/archive/myvm1.eastus.cloudapp.azure.com/*.pem
+=========================
+edit ~/.jupyter/jupyter_notebook_config.py
+
+c.NotebookApp.certfile = '/etc/letsencrypt/live/myvm1.eastus.cloudapp.azure.com/fullchain.pem'
+c.NotebookApp.keyfile  = '/etc/letsencrypt/live/myvm1.eastus.cloudapp.azure.com/privkey.pem'
+# Set ip to '*' to bind on all interfaces (ips) for the public server
+c.NotebookApp.ip = '*'
+c.NotebookApp.open_browser = False
+c.NotebookApp.iopub_data_rate_limit = 10000000000
+
+# c.NotebookApp.password = u'<your hashed password here>'
+# c.NotebookApp.port = 8888
+
+jupyter notebook --ip=dsgpu1 
+alias nb='jupyter notebook --ip=myvm1'
+
+# ----------------------------------------------
+install nginx web server
+
+  https://mediatemple.net/community/products/developer/204405534/install-nginx-on-ubuntu
+   
+   sudo apt-get install nginx
+   sudo /etc/init.d/nginx start
+# ----------------------------------------------
+install gunicorn application server
+
+https://www.airpair.com/python/posts/python-servers
+https://gunicorn.org/
+
+conda install gunicorn
+# ----------------------------------------------
+Configure nginx & gunicorn
+
+Configuration and (re)starting of nginx and gunicorn 
+is described in a separate file
+
+script to start gunicorn on reboot:
+
+    /etc/init.d/gnu_unicorn
+
+# --------------------------------------------------------------
+
