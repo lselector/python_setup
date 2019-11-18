@@ -53,6 +53,7 @@ def bbb():
 
     return bb
 
+# --------------------------------------------------------------
 def ddd(nrows=10):
     """
     # returns a simple pandas DataFrame - useful for quick tests

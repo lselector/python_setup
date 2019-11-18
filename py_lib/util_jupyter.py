@@ -186,32 +186,37 @@ def shout_error(ss, rep=10):
     sys.exit(1) 
 
 # --------------------------------------------------------------
-def ddd():
+def ddd(nrows=10):
     """
     # returns a simple pandas DataFrame - useful for quick tests
+    # nrows is number of rows (divisible by 10), for example:
+    #     df = ddd()
+    #     df = ddd(100)
+    #     df = ddd(10**6)   # million rows
     """
-    nrows = 7
-    ss = b'\xe7\x8b\x97'
-    ch1 = ss.decode('utf-8')
-    ss = b'\xe6\xb1\xbd\xe8\xbd\xa6'
-    ch2 = ss.decode('utf-8')
+    n_aa = 10
+    nn = int(nrows/n_aa)
+    if nn < 1:
+        nn = 1
     aa = pd.DataFrame({
-          'ii':[0,1,2,3,4,5,np.nan],                                           # float64
-          'i1':[6,5,4,3,2,1,0],
-          'i2':[6,5,4,4,1,1,0],
-          'ff':[0.0,1.0,2.0,np.NaN,4.0,5.0,6.0],                               # float64
-          'f1':[0.0,1.01,2.002,3.0003,4.00004,5.000005,6.0000006],
-          'f2':[1.11,2.22,3.33,4.44,5.55,7.77,9.99],
-          'ss':['s0','s1',ch1,ch2,np.nan,'s5','s6'],                           # dtype=object, np.nan is float64
-          's1':np.array(['s0','s1','s2','s2',np.nan,'s5','s6'],dtype=np.str),  # dtype=object, 'nan' is string
-          's2':['1.11','2.22','3.33','4.44','5.55','7.77','9.99'],
-          'bb':[True, False, True, False, np.nan, False, True],                # dtype=object, np.nan is float64
-          'b1':[True, False, True, False, True, False, True],                  # dtype=bool
-          'xx':range(nrows),
-          'yy':[x*50 + 60 + np.random.randn() for x in range(nrows)]
+          'ii':nn*[0,1,2,3,4,5,np.nan,7,8,9],
+          'i1':nn*[6,5,4,3,2,1,0,-1,-2,-3],
+          'i2':nn*[6,5,4,4,1,1,0,-1,-2,-3],
+          'ff':nn*[0.0,1.0,2.0,np.NaN,4.0,5.0,6.0,7.0,8.0,9.0],
+          'f1':nn*[0.0,1.01,2.002,3.0003,4.00004,5.000005,6.0000006,7.0,8.0,9.0],
+          'f2':nn*[1.11,2.22,3.33,4.44,5.55,7.77,9.99,0.01,-0.01,-1.11],
+          'ss':nn*['s0','s1','狗','汽车',np.nan,'s5','s6','s7','s8','s9'],
+          's1':nn*list(np.array(['s0','s1','s2','s2',np.nan,'s5','s6','s7','s8','s9'],dtype=np.str)),
+          's2':nn*['1.11','2.22','3.33','4.44','5.55','7.77','9.99','0.01','-0.01','-1.11'],
+          'bb':nn*[True, False, True, False, np.nan, False, True,np.nan, False, True],
+          'b1':nn*[True, False, True, False, True, False, True, True, False, True],
+          'xx':nn*list(range(n_aa)),
+          'yy':nn*[x*50 + 60 + np.random.randn() for x in range(n_aa)]
     })
+    aa = aa[['ii','i1','i2','ff','f1','f2','ss','s1','s2','bb','b1','xx','yy']].copy()
+    aa.index = range(len(aa))
 
-    return aa[['ii','i1','i2','ff','f1','f2','ss','s1','s2','bb','b1','xx','yy']]
+    return aa
 
 # --------------------------------------------------------------
 def cell_width(width_pct=95):
