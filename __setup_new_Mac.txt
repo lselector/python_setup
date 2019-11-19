@@ -41,6 +41,8 @@ Sublime Text:
   https://www.sublimetext.com/3
 iTerm2
   https://www.iterm2.com/
+nteract
+  https://nteract.io/
 FileZilla
   https://filezilla-project.org/download.php?platform=osx
 WiFi Explorer Lite
