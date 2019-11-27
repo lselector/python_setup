@@ -19,7 +19,11 @@ set tabstop=4     " read :help tab for explanation of tabstop, softtabstop, shif
 set softtabstop=4 "
 set shiftwidth=4  "
 set expandtab     " inserts spaces instead of tab (for real tab use ctrl-V followed by tab)
-"set smarttab     " inserts spaces in the beginining, tabs in the middle, see :help smarttab
+
+filetype plugin on
+set path=$PWD/**
+" set path+=**     " Search into subfolders, tab-completion
+set wildmenu     " Display all matching files when we tab complete
 
 " -------------------------------------
 " always show this custom status line

@@ -10,6 +10,7 @@ alias  ii='export QT_QPA_PLATFORM='offscreen';ipython'
 alias  nb='jupyter notebook'
 alias  jj='jupyter lab'
 
+# alias tree="find . -print | sed -e 's;[^/]*/;|____;g;s;____|; |;g'"
 alias fg='find ./ -type f -print | grep --color -P '
 alias fxg='find ./ -type f -print | xargs grep --color -P '
 
