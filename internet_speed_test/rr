@@ -1,0 +1,3 @@
+#! /bin/bash
+python speedtest_log.py >> speedtest.err 2>&1
+
