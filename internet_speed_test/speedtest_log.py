@@ -1,4 +1,3 @@
-#! /usr/bin/env python
 
 # --------------------------------------------------------------
 # Utility to monitor internet speed on a Mac.
@@ -37,9 +36,9 @@ import pandas as pd
 from pandas.plotting import register_matplotlib_converters
 register_matplotlib_converters()
 
-SPEEDTEST_CMD = 'speedtest.py'
+SPEEDTEST_CMD = './speedtest.py'
 LOG_FILE      = 'speedtest.log'
-IMG_FILE      = '/Users/levselector/Desktop/sptest.png'
+IMG_FILE      = os.getenv('HOME') + '/Desktop/sptest.png'
 
 # --------------------------------------------------------------
 def setup_logging():
