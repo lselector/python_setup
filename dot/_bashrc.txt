@@ -18,3 +18,31 @@ export PATH="$HOME/anaconda3/bin:$PATH"
 
 # source "$HOME/perl5/perlbrew/etc/bashrc"
 # export PATH=".:/usr/local/mysql/bin:$PATH"
+
+export PYTHONPATH=".:$HOME/py_lib"
+
+# --------------------------------------------------------------
+if [ -f $HOME/.mygit ] ;
+then
+    source $HOME/.mygit
+fi
+
+# --------------------------------------------------------------
+# FZF
+export FZF_DEFAULT_COMMAND="fd . $HOME"
+export FZF_CTRL_T_COMMAND="$FZF_DEFAULT_COMMAND"
+export FZF_ALT_C_COMMAND="fd -t d . $HOME"
+
+# --------------------------------------------------------------
+# BAT
+export BAT_THEME="OneHalfLight"
+
+# --------------------------------------------------------------
+# EXA - https://jlk.fjfi.cvut.cz/arch/manpages/man/exa.1.en
+EXA_COLORS="uu=8;31:ex=8;31:sn=8;34:sb=8;34:di=10;32"
+EXA_COLORS="$EXA_COLORS:ur=8;31:uw=8;31:ux=8;31:ue=8;31"
+EXA_COLORS="$EXA_COLORS:gr=8;34:gw=8;34:gx=8;34:tr=8;31:tw=8;31:tx=8;31:*.md=8;31:README*=8;31"
+export EXA_COLORS
+
+# --------------------------------------------------------------
+
