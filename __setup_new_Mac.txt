@@ -21,9 +21,6 @@ Memory Clean $9.99
 DaisyDisk $9.99
   https://itunes.apple.com/us/app/daisydisk/id411643860?mt=12
 ========================================================
-Uberlayer $3.99
-  https://itunes.apple.com/us/app/uberlayer/id510139938?mt=12
-========================================================
 BetterSnapTool $2.99
   https://itunes.apple.com/us/app/bettersnaptool/id417375580?mt=12
 ========================================================
@@ -33,6 +30,8 @@ FreeSpace $0.99
 ========================================================
 Free software 
 ========================================================
+Overlay App (instead of Uberlayer) 
+  https://apps.apple.com/hu/app/overlay/id653092846?mt=12
 Battery Health 2
   https://itunes.apple.com/us/app/battery-health-2-stats-info/id1120214373?mt=12
 LastPass
