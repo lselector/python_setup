@@ -5,6 +5,31 @@ export PYTHONDONTWRITEBYTECODE=1
 export PROMPT_COMMAND='PS1_PATH=$(sed "s:\([^/\.]\)[^/]*/:\1/:g" <<< ${PWD/#$HOME/\~})'
 export PS1='\u@\h:$PS1_PATH\$ '
 
+# ------------------------------------
+OS="`uname`"
+case $OS in
+  'Linux')
+    OS='Linux'
+    ;;
+  'FreeBSD')
+    OS='FreeBSD'
+    ;;
+  'WindowsNT')
+    OS='Windows'
+    ;;
+  'Darwin')
+    OS='Mac'
+    ;;
+  'SunOS')
+    OS='Solaris'
+    ;;
+  'AIX') ;;
+  *) ;;
+esac
+
+export OS
+# ------------------------------------
+
 if [ -f $HOME/.bash_aliases ] ;
 then
     source $HOME/.bash_aliases
