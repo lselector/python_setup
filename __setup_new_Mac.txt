@@ -30,40 +30,52 @@ FreeSpace $0.99
 ========================================================
 Free software 
 ========================================================
-Overlay App (instead of Uberlayer) 
-  https://apps.apple.com/hu/app/overlay/id653092846?mt=12
-Battery Health 2
-  https://itunes.apple.com/us/app/battery-health-2-stats-info/id1120214373?mt=12
-LastPass
-  https://www.lastpass.com/
-Sublime Text:
-  https://www.sublimetext.com/3
-iTerm2
+iTerm2 - substitute to terminal app
   https://www.iterm2.com/
-nteract
-  https://nteract.io/
-FileZilla
-  https://filezilla-project.org/download.php?platform=osx
-WiFi Explorer Lite
-  https://itunes.apple.com/us/app/wifi-explorer-lite/id1408727408?mt=12
-Scroll Reverser
+Sublime Text - text editor
+  https://www.sublimetext.com/3
+Scroll Reverser - tune scrolling direction for mouse vs trackpad
   https://pilotmoon.com/scrollreverser/
-Google Chrome
+Google Chrome - browser
   https://www.google.com/chrome/
-Firefox
+Firefox - browser
   https://www.mozilla.org/en-US/firefox/mac/
-SeaMonkey
+SeaMonkey - HTML Editor
   http://www.seamonkey-project.org/releases/
+LastPass - store passwords
+  https://www.lastpass.com/
+=====================================
+Overlay App (instead of Uberlayer) - frame for recording part of the screen
+  https://apps.apple.com/hu/app/overlay/id653092846?mt=12
+Battery Health 2 - show battery health 
+  https://itunes.apple.com/us/app/battery-health-2-stats-info/id1120214373?mt=12
+nteract - viewer for Jupyter files
+  https://nteract.io/
+FileZilla - FTP app
+  https://filezilla-project.org/download.php?platform=osx
+Blackmagic Disk Speed Test
+  https://itunes.apple.com/us/app/blackmagic-disk-speed-test/id425264550?mt=12
+WiFi Explorer Lite 
+  https://itunes.apple.com/us/app/wifi-explorer-lite/id1408727408?mt=12
+=====================================
 VLC Video Player
   https://www.videolan.org/vlc/download-macosx.html
 Adobe Acrobat Reader
   https://get.adobe.com/reader/
-Blackmagic Disk Speed Test
-  https://itunes.apple.com/us/app/blackmagic-disk-speed-test/id425264550?mt=12
-Oceanaudio
+Oceanaudio - edit audio, convert to mp3
   http://www.ocenaudio.com/
+OpenShot Video Editor
+  https://www.openshot.org/
 MediaHuman Audio Converter
   https://www.mediahuman.com/audio-converter/
+Tag Stripper (strip tags from audio files)
+  https://www.markvapps.com/tagstripper
+=====================================
+Some other tools I like:
+Ghost Reader Plus - convert text to Audio
+GitHub Desktop
+Malwarebytes
+PDF Expert
 =====================================
 anaconda python 3.7 - to be installed in user's home directory
 Download terminal installation script from:
@@ -126,7 +138,7 @@ also add the folloing into .bash_aliases
   alias ll='exa -lF'
   alias lll='exa -lFa'
 =====================================
-Mactex (this is 3.42 GB in size) 
+Mactex (this is 3.42 GB in size) - to do formulas on Mac
   https://tug.org/mactex/mactex-download.html
 =====================================
 After all software installed, configure:
