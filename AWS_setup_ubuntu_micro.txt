@@ -99,6 +99,13 @@ Note: APT is acronym for Advanced Package Tool (installing via ftp or http).
       instead of
         sudo apt-get install htop
 
+Note: 
+  If you want to automate installations using a script, you
+  may want to add "-y" option to automatically answer "Yes"
+  to prompts, for example:
+    sudo apt install -y nginx
+    sudo apt-get install -y nginx
+
 Note: in some cases you will be instructed to use "dpkg" command:
    sudo dpkg -i somepackage.deb
 
