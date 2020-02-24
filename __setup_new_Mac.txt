@@ -1,29 +1,24 @@
 Initial installation
-Standard software (including MS Office)
-User account, network access, WiFi, iCloud Account
+  User account, admin rights, 
+  Network access, WiFi, iCloud Account
+  MS Office, MS Teams, OneDrive
 
 ========================================================
-Commercial Software - total ~$180. 
+Commercial Software minimum set - total ~$234. 
 ========================================================
 BBEdit $49.99
   https://www.barebones.com/store/download.html
   To enter License - go to menu BBEdit > License
-========================================================
 UltraEdit for Mac $99.95
   https://www.ultraedit.com/products/mac-text-editor/
-========================================================
 DeltaWalker for Mac $59.95 (compare files / directores)
   https://www.deltawalker.com/
-========================================================
 Memory Clean $9.99
   https://fiplab.com/apps/memory-clean-for-mac
-========================================================
 DaisyDisk $9.99
   https://itunes.apple.com/us/app/daisydisk/id411643860?mt=12
-========================================================
 BetterSnapTool $2.99
   https://itunes.apple.com/us/app/bettersnaptool/id417375580?mt=12
-========================================================
 FreeSpace $0.99
   https://itunes.apple.com/us/app/freespace/id457520846?mt=12
 
@@ -72,10 +67,20 @@ Tag Stripper (strip tags from audio files)
   https://www.markvapps.com/tagstripper
 =====================================
 Some other tools I like:
-Ghost Reader Plus - convert text to Audio
-GitHub Desktop
-Malwarebytes
-PDF Expert
+  Ghost Reader Plus - convert text to Audio
+  GitHub Desktop
+  Malwarebytes
+  PDF Expert
+  iTubeGo - download YouTube videos
+  Splashtop Business - manage remote computers
+  Adobe Photoshop & Illustrator
+  MacX DVD Video Converter Pro Pack - convert video to video or audio
+  MediaHuman Audio Converter 
+  EpuborAudibleConverter - convert audio books into mp3
+  EPUB Converter.app - convert electronic books into txt or PDF
+  NordVPN IKE.app - VPN
+  PingPlotter.app - trace network problems
+  SecureCRT.app - Unix Terminal app
 =====================================
 anaconda python 3.7 - to be installed in user's home directory
 Download terminal installation script from:
