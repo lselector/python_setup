@@ -29,6 +29,7 @@ iTerm2 - substitute to terminal app
   https://www.iterm2.com/
 Sublime Text - text editor
   https://www.sublimetext.com/3
+  sudo ln -s "/Applications/Sublime Text.app/Contents/SharedSupport/bin/subl" /usr/local/bin/subl
 Scroll Reverser - tune scrolling direction for mouse vs trackpad
   https://pilotmoon.com/scrollreverser/
 Google Chrome - browser
