@@ -29,7 +29,10 @@ esac
 
 export OS
 # ------------------------------------
-
+if [[ "$OS" == "Mac" ]]; then # Mac OSX
+    export BASH_SILENCE_DEPRECATION_WARNING=1
+fi
+# ------------------------------------
 if [ -f $HOME/.bash_aliases ] ;
 then
     source $HOME/.bash_aliases
