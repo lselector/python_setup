@@ -43,8 +43,11 @@ LastPass - store passwords
 =====================================
 Overlay App (instead of Uberlayer) - frame for recording part of the screen
   https://apps.apple.com/hu/app/overlay/id653092846?mt=12
-Battery Health 2 - show battery health 
+Battery Health (or paid version 2 or 3) from FIBLAB - show battery health 
+  https://fiplab.com/apps/battery-health-3-for-mac
   https://itunes.apple.com/us/app/battery-health-2-stats-info/id1120214373?mt=12
+Intel Power Gadget
+  https://software.intel.com/en-us/articles/intel-power-gadget/
 nteract - viewer for Jupyter files
   https://nteract.io/
 FileZilla - FTP app
@@ -92,19 +95,23 @@ Google for:
   how to install Command Line Tools macOS
 You will find something like this:
   http://osxdaily.com/2014/02/12/install-command-line-tools-mac-os-x/
+  https://macpaw.com/how-to/install-command-line-tools
+Basically you should run this command:
+     xcode-select --install
 =====================================
 Homebrew:
   https://brew.sh/
 
 /usr/bin/ruby -e "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/master/install)"
 
-brew install htop wget grep
-brew install fzf ripgrep bat fd
-brew instal exa
+brew install htop wget grep vim git
+brew install fzf fd ripgrep bat exa
 
 htop - to show CPU and memory usage
 wget - to download things 
 grep - to filter through files or listings
+vim - text editor
+git - version control
 fzf  - interactively filter its input
 fd   - a replacement to find command
 ripgrep (rg) - replacement to grep
@@ -156,3 +163,12 @@ After all software installed, configure:
   Apple scripts in Finder toolbar
   ipython startup files and config changes
 =====================================
+GitHub Desktop
+=====================================
+MySQL:
+  - install MySQL community edition from https://dev.mysql.com/downloads/mysql/ 
+  - install MySQL WorkBench community edition from https://dev.mysql.com/downloads/workbench/
+=====================================
+=====================================
+=====================================
+
