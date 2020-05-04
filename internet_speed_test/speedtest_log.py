@@ -1,5 +1,6 @@
 
 # --------------------------------------------------------------
+# speedtest_log.py - by Lev Selector
 # Utility to monitor internet speed on a Mac.
 # Every 10 min refreshes image ~/Desktop/sptest.png
 # 
@@ -11,7 +12,7 @@
 #      speedtest.log
 #      speedtest.ipynb
 # 
-# The jupyter notebook helps to debug code
+# Note: the jupyter notebook helps to debug code
 # (in case some libraries are missing).
 #      
 # 
@@ -94,18 +95,18 @@ def make_plot(plt, df, row_index=1, nhours=2):
     plt.xlabel('Date/Time')
     plt.xticks(rotation='45', ha='right')
     # ---------------------------------
-    ax = plt.gca()
-    fg = plt.gcf()
+    ax = plt.gca()    # get current Axes instance
+    fg = plt.gcf()    # get current figure
 
     start = df.loc[0,'timestamp']
     end   = df.loc[df.index[-1],'timestamp']
     delta = (end-start)/11.0
-    arr = [start]
+    arr_ts = [start]
     for ii in range(12):
-        val = arr[-1]
-        arr += [val+delta]
+        val = arr_ts[-1]       # last element
+        arr_ts += [val+delta]  # add shifted by delta
 
-    ax.xaxis.set_ticks(arr)
+    ax.xaxis.set_ticks(arr_ts)
     h_fmt = dates.DateFormatter('%m/%d %H:%M')
     ax.xaxis.set_major_formatter(h_fmt)
     # ---------------------------------
@@ -129,24 +130,35 @@ def read_data():
         df[col] = df[col].fillna(0.0)
 
     # We run script every 10 min, or 6/hr, or 6*24=144/day
-    Nrows = 5*144
+    Nrows = 5*144   # 720 rows
     return df[-Nrows:]   # return dots for last Nrows only
 
 # --------------------------------------------------------------
 def main():
     setup_logging()
+    # ------------------------------------------
+    # run speed test - and write row into LOG_FILE
     try:
         ping, download, upload = get_speedtest_results()
     except ValueError as err:
         logging.info(err)
     else:
         logging.info("%5.1f %5.1f %5.1f", ping, download, upload)
-    df = read_data()
+
+    # ------------------------------------------
+    # shorten the log file - keep only last 2,000 rows
+    MYCMD = f"""echo "$(tail -2000 {LOG_FILE})" > {LOG_FILE}"""
+    os.system(MYCMD)
+
+    # ------------------------------------------
+    # read last 720 rows
+    df = read_data()   # pandas DataFrame with up to 720 rows
     
     # ------------------------------------------
-    w = 10
-    h = 5
-    rcParams['figure.figsize'] = w, h
+    # make a graph with two plots - and save as IMG_FILE
+    fig_width  = 10
+    fig_height = 5
+    rcParams['figure.figsize'] = fig_width, fig_height
     plt.gcf().clear()
     make_plot(plt, df.copy(), row_index=1, nhours=5*24)
     make_plot(plt, df.copy(), row_index=3, nhours=2   )
