@@ -2,6 +2,8 @@
 # aliases
 #
 
+alias clear="clear && printf '\e[3J'"     # clear screen and scrollback
+
 # --------------------------------------------------------------
 if [[ "$OS" == "Linux" ]]; then
     alias ls='ls --color=auto'
