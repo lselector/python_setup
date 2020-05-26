@@ -1,8 +1,8 @@
-#! /bin/env python
+#! /usr/bin/env python3
 
 """
 # gistall.py
-# checks status of all repos under ~/mydir
+# checks status of all repos under ~/Documents/GitHub
 # It effectively runs "gist" command in all repos directories.
 # To use it, create a symbolic link like this:
 #    cd ~/bin
@@ -18,16 +18,15 @@ import re
 import argparse
 
 import ipython_debug
-# reload(ipython_debug)
 from ipython_debug import *
 
 import mybag
-# reload(mybag)
 from mybag import *
 
 import myutil
-# reload(myutil)
 from myutil import *
+
+ROOT_DIR = "Documents/GitHub"
 
 # ---------------------------------------------------------------
 def make_cmd_template(bag):
@@ -70,7 +69,7 @@ def process_cmd_args(bag):
     """
     # process cmd line arguments
     """
-    descr_str = """Script to check status of all repos under ~/mydir
+    descr_str = f"""Script to check status of all repos under {ROOT_DIR}
         by running git fetch, diff, and status in subdirectories"""
     parser = argparse.ArgumentParser(description=descr_str)
     parser.add_argument('--verbose', '-verbose', '-v', 
@@ -93,7 +92,7 @@ def set_bag_repo_dirs(bag):
     # populate bag.repo_dirs - a list of repositories to go through
     # reades the list from file ~/.gitsall  
     """
-    mylist = ["common_config", "py_lib"] # min list
+    mylist = [ ] # min list is empty
     bag.dot_gistall = bag.home + "/.gistall"
     if os.path.isfile(bag.dot_gistall):
         lines = slurp(bag.dot_gistall).split("\n") 
@@ -102,7 +101,6 @@ def set_bag_repo_dirs(bag):
             mydir  = bag.root_dir + "/" + myword
             if len(myword) and (myword[0] != '#') and os.path.isdir(mydir):
                 mylist.append(myword)
-    
     bag.repo_dirs = sorted(set(mylist)) # remove duplicates and order
 
 # ---------------------------------------------------------------
@@ -115,9 +113,9 @@ def myexit(bag):
     sys.exit(bag.error_flag)
 
 # ---------------------------------------------------------------
-def chdir_mydir(bag):
+def chdir_to_gh(bag):
     """
-    # cd into mydir directory
+    # cd into ROOT_DIR directory
     """    
     if not os.path.isdir(bag.root_dir):
         print("ERROR, directory '%s' doesn't exist, Exiting ..." % bag.root_dir)
@@ -132,6 +130,26 @@ def chdir_mydir(bag):
         bag.error_flag = 1
         myexit(bag)
 
+# --------------------------------------------------------------
+def my_run_cmd(bag, mycmd, verbose=True, mask_error=False):
+    """
+    # runs command, prints status line
+    # if error, sets bag.error_flag
+    """
+    if verbose:
+        print('running ' + mycmd)
+    try:
+        bag.retcode = subprocess.call(mycmd, shell=True)
+        if bag.retcode == 0:
+            print("SUCCESS, process return code = " + str(bag.retcode))
+        else:
+            bag.error_flag = 1
+            print("ERROR, process return code = " + str(bag.retcode))
+
+    except Exception:
+        bag.error_flag = 1
+        print("ERROR, script failed with exception")
+
 # ---------------------------------------------------------------
 def main(bag):
     """
@@ -142,19 +160,19 @@ def main(bag):
     process_cmd_args(bag)
     bag.init_dir = os.getcwd() # initial directory
     bag.home = os.path.expanduser("~")
-    bag.root_dir = bag.home + "/" + "mydir"
+    bag.root_dir = bag.home + "/" + ROOT_DIR
     set_bag_repo_dirs(bag)
-    chdir_mydir(bag)
+    chdir_to_gh(bag)
     bag.cmd_template = make_cmd_template(bag)
     for repo_dir in bag.repo_dirs:
         if not os.path.isdir(repo_dir):
             if bag.verbose:
                 print("\n", bag.sep, "directory '%s' doesn't exist, skipping ...\n" % repo_dir)
             continue
-        mycmd = bag.cmd_template.replace("__REPO_DIR__",repo_dir)
+        mycmd = bag.cmd_template.replace("__REPO_DIR__",repo_dir).strip()
         if bag.verbose:
             print(mycmd,"\n")
-        run_cmd(bag, mycmd, verbose=False)
+        my_run_cmd(bag, mycmd, verbose=False)
 
     myexit(bag)
 
