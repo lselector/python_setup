@@ -306,6 +306,9 @@ sudo chmod -R 755 /etc/letsencrypt/live
 sudo chmod -R 755 /etc/letsencrypt/archive
 sudo chmod 644 /etc/letsencrypt/archive/myvm1.eastus.cloudapp.azure.com/*.pem
 =========================
+
+https://jupyter-notebook.readthedocs.io/en/stable/public_server.html
+
 edit ~/.jupyter/jupyter_notebook_config.py
 
 c.NotebookApp.certfile = '/etc/letsencrypt/live/myvm1.eastus.cloudapp.azure.com/fullchain.pem'
@@ -315,11 +318,20 @@ c.NotebookApp.ip = '*'
 c.NotebookApp.open_browser = False
 c.NotebookApp.iopub_data_rate_limit = 10000000000
 
-# c.NotebookApp.password = u'<your hashed password here>'
-# c.NotebookApp.port = 8888
+# run command:
+    jupyter notebook password
+# it will save hashed password into:
+    ~/.jupyter/jupyter_notebook_config.json
+# copy password - and paste into ~/.jupyter/jupyter_notebook_config.py
 
-jupyter notebook --ip=dsgpu1 
-alias nb='jupyter notebook --ip=myvm1'
+c.NotebookApp.password = u'<your hashed password here>'
+c.NotebookApp.port = 8888
+
+# run command: hostname
+   its output use like this
+
+jupyter notebook --ip=myhost1 
+alias nb='jupyter notebook --ip=myhost1'
 
 # ----------------------------------------------
 install nginx web server

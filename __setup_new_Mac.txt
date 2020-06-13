@@ -89,8 +89,15 @@ Some other tools I like:
 anaconda python 3.7 - to be installed in user's home directory
 Download terminal installation script from:
   https://www.anaconda.com/distribution/
+Conda y default activates the "base" environment.
+See how to work with conda environments here:
+  - https://docs.conda.io/projects/conda/en/latest/user-guide/tasks/manage-environments.html
+To hide the environment (remove prefix from unix prompt)
+  run these two commands:
+    conda config
+    conda config --set changeps1 False
 =====================================
-Install Command Line Tools
+Install Command Line Tools (needed for "brew")
 Google for: 
   how to install Command Line Tools macOS
 You will find something like this:
