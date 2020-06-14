@@ -1,10 +1,14 @@
+**/.ipynb_checkpoints
+**/junk*.*
+**/.DS_Store
+**/__pycache__/
+**/*.py[cod]
+**/Thumbs.db
 .svn
 .classpath
 .project
 .settings
 target
-*.pyc
 *.swp
-.DS_Store
 .idea
 *.un~
