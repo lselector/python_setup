@@ -84,6 +84,9 @@ def ddd(nrows=10):
     aa = aa[['ii','i1','i2','ff','f1','f2','ss','s1','s2','bb','b1','xx','yy']].copy()
     aa.index = range(len(aa))
 
+    if 1 <= nrows < 10:
+        aa = aa[:nrows+1]
+
     return aa
 
 # --------------------------------------------------------------
