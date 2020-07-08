@@ -50,6 +50,12 @@ export PATH="$HOME/anaconda3/bin:$PATH"
 export PYTHONPATH=".:$HOME/py_lib"
 
 # --------------------------------------------------------------
+if [ -f $HOME/.myvv ] ;
+then
+    source $HOME/.myvv
+fi
+
+# --------------------------------------------------------------
 if [ -f $HOME/.mygit ] ;
 then
     source $HOME/.mygit
