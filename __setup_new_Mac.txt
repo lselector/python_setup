@@ -21,6 +21,8 @@ BetterSnapTool $2.99
   https://itunes.apple.com/us/app/bettersnaptool/id417375580?mt=12
 FreeSpace $0.99
   https://itunes.apple.com/us/app/freespace/id457520846?mt=12
+Alfred - hotkeys - search, keywords, text expansion
+  https://www.alfredapp.com/
 
 ========================================================
 Free software 
@@ -40,6 +42,8 @@ SeaMonkey - HTML Editor
   http://www.seamonkey-project.org/releases/
 LastPass - store passwords
   https://www.lastpass.com/
+Spectacle - move and resize windows
+  https://www.spectacleapp.com/
 =====================================
 Overlay App (instead of Uberlayer) - frame for recording part of the screen
   https://apps.apple.com/hu/app/overlay/id653092846?mt=12
