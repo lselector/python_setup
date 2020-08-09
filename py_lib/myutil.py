@@ -14,7 +14,7 @@ import argparse                   # parse cmd options
 import re                         # regular expressions
 # --------------------------------------
 import time
-from datetime import date, datetime, timedelta
+import datetime as dt
 # --------------------------------------
 import subprocess
 import socket
@@ -165,7 +165,7 @@ def print_func_name(bag):
     # prints current function name
     # call this function as a first line in your function.
     """
-    now_str = datetime.now().strftime("%Y-%m-%d %H:%M:%S")
+    now_str = dt.datetime.now().strftime("%Y-%m-%d %H:%M:%S")
     func_name = str(inspect.stack()[1][3])
     mylog(bag, "%s Doing %s" % (now_str, func_name))
 
@@ -242,21 +242,22 @@ def run_cmd(bag, mycmd, verbose=True, mask_error=False):
     # if error, sets bag.error_flag and includes
     # the word ERROR in printout without masking it
     """
-    mylog(bag, 'running ' + mycmd, verbose=verbose)
+    if verbose:
+        mylog(bag, 'running ' + mycmd)
     try:
         bag.retcode = subprocess.call(mycmd, shell=True)
         if bag.retcode == 0:
             ss = "SUCCESS, process return code = " + str(bag.retcode)
-            mylog(bag, ss, verbose)
+            mylog(bag, ss)
         else:
             bag.error_flag = 1
             ss = "ERROR, process return code = " + str(bag.retcode)
-            mylog(bag, ss, verbose=True, mask_log=mask_error)
+            mylog(bag, ss, mask_log=mask_error)
 
     except Exception:
         bag.error_flag = 1
         ss = "ERROR, script failed with exception"
-        mylog(bag, ss, verbose=True, mask_log=mask_error)
+        mylog(bag, ss, mask_log=mask_error)
 
 
 # --------------------------------------------------------------

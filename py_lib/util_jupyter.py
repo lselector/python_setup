@@ -106,8 +106,7 @@ def date_time():
     """
     # returns string YYYY-MM-DD HH:MM:SS
     """
-    import datetime
-    now_str = datetime.datetime.now().strftime("%Y-%m-%d %H:%M:%S")
+    now_str = dt.datetime.now().strftime("%Y-%m-%d %H:%M:%S")
     return now_str
 
 # --------------------------------------------------------------
@@ -115,8 +114,7 @@ def date_time_for_fname():
     """
     # returns string YYYYMMDD_HHMMSS
     """
-    import datetime
-    now_str = datetime.datetime.now().strftime("%Y%m%d_%H%M%S")
+    now_str = dt.datetime.now().strftime("%Y%m%d_%H%M%S")
     return now_str
 
 # --------------------------------------------------------------

@@ -3,6 +3,7 @@
 """
 # myutil_dt.py - utility functions for date/time
 # Created in Dec 2014 by Lev Selector
+# Last modified in Aug 2020
 """
 
 import os
@@ -12,10 +13,8 @@ os.environ["PYTHONUNBUFFERED"] = "1"
 import sys
 if sys.version_info > (3,3):
     import importlib
-import time
-from datetime import date, timedelta, datetime
-import re
-import socket
+import time, re, socket
+import datetime as dt
 import pandas as pd
 import numpy as np
 from pandas import DataFrame, Series
@@ -63,8 +62,8 @@ def days_in_month(mydate):
     mstart1  = "%4d-%02d" % (int(y1),int(m1))   # month as 'YYYY-MM'
     mstart2  = get_next_month(mstart1)          # next month as 'YYYY-MM'
     (y2, m2) = mstart2.split('-')
-    # from datetime import date
-    return (date(int(y2), int(m2), 1) - date(int(y1), int(m1), 1)).days
+
+    return (dt.date(int(y2), int(m2), 1) - date(int(y1), int(m1), 1)).days
 
 # --------------------------------------------------------------
 def utc_date_to_epoch_secs(date_str='1970-01-01'):
@@ -198,7 +197,7 @@ def now_str():
     """
     # returns current date-time as a string like this: 2013-09-06 18:11:43
     """
-    return datetime.now().strftime("%Y-%m-%d %H:%M:%S")
+    return dt.datetime.now().strftime("%Y-%m-%d %H:%M:%S")
 
 # --------------------------------------------------------------
 def now_str_for_log():
@@ -206,7 +205,7 @@ def now_str_for_log():
     # returns current date-time as a string like this: YYYYMMDD_HHMMSS,
     # for example: 20130906_181143
     """
-    return datetime.now().strftime("%Y%m%d_%H%M%S")
+    return dt.datetime.now().strftime("%Y%m%d_%H%M%S")
 
 # --------------------------------------------------------------
 def print_start_time(bag):
@@ -252,8 +251,8 @@ def days_start_to_end(bag):
     # if it is daily report - returns 1
     # for monthly - returns number of days in this month
     """
-    start_date = datetime.strptime(bag.start_date,'%Y-%m-%d')
-    end_date   = datetime.strptime(bag.end_date,  '%Y-%m-%d')
+    start_date = dt.datetime.strptime(bag.start_date,'%Y-%m-%d')
+    end_date   = dt.datetime.strptime(bag.end_date,  '%Y-%m-%d')
     return (end_date - start_date).days
 
 # --------------------------------------------------------------
@@ -262,21 +261,21 @@ def get_date_shifted_by_days(start_date, num_days):
     # accepts and returns date as string YYYY-MM-DD 
     # also accepts shift (in days, int)
     """
-    return (datetime.strptime(start_date,'%Y-%m-%d') + timedelta(num_days)).strftime('%Y-%m-%d')
+    return (dt.datetime.strptime(start_date,'%Y-%m-%d') + dt.timedelta(num_days)).strftime('%Y-%m-%d')
 
 # --------------------------------------------------------------
 def get_prev_date(ss):
     """
     # accepts and returns date as string YYYY-MM-DD
     """
-    return (datetime.strptime(ss,'%Y-%m-%d') - timedelta(1)).strftime('%Y-%m-%d')
+    return (dt.datetime.strptime(ss,'%Y-%m-%d') - dt.timedelta(1)).strftime('%Y-%m-%d')
 
 # --------------------------------------------------------------
 def get_next_date(ss):
     """
     # accepts and returns date as string YYYY-MM-DD
     """
-    return (datetime.strptime(ss,'%Y-%m-%d') + timedelta(1)).strftime('%Y-%m-%d')
+    return (dt.datetime.strptime(ss,'%Y-%m-%d') + dt.timedelta(1)).strftime('%Y-%m-%d')
 
 # --------------------------------------------------------------
 def get_day_only(ss):
@@ -384,7 +383,7 @@ def current_day():
     """
     # returns day of the month as a 2-digit string
     """
-    return str(date.today()).split('-')[2]
+    return str(dt.date.today()).split('-')[2]
 
 # --------------------------------------------------------------
 def date_month_start_current():
@@ -510,7 +509,7 @@ def fix_date(yyyy,mm,dd):
     mm   = int(mm)
     dd   = int(dd)
     try:
-        datetime(year=yyyy,month=mm,day=dd,hour=1)
+        dt.datetime(year=yyyy,month=mm,day=dd,hour=1)
     except:
         print("wrong date: (%4d-%2d-%2d)" % (yyyy,mm,dd))
         raise
@@ -552,9 +551,9 @@ def calc_date_key(date_str=None):
     #    calc_date_key('2015-03-24') # returns 38069
     # note: 1911-01-01 was Sunday
     """
-    dt  = datetime.strptime(date_str    ,'%Y-%m-%d')
-    dt0 = datetime.strptime('1910-12-31','%Y-%m-%d')
-    return (dt - dt0).days
+    dt_orig = dt.datetime.strptime(date_str    ,'%Y-%m-%d')
+    dt_base = dt.datetime.strptime('1910-12-31','%Y-%m-%d')
+    return (dt_orig - dt_base).days
 
 # --------------------------------------------------------------
 def date_valid(date_str=None, fmt='%Y-%m-%d'):
@@ -566,7 +565,7 @@ def date_valid(date_str=None, fmt='%Y-%m-%d'):
     #   date_valid('03/24/2015','%m/%d/%Y')
     """
     try:
-        datetime.strptime(date_str, fmt)
+        dt.datetime.strptime(date_str, fmt)
         return True
     except:
         return False
@@ -599,7 +598,7 @@ def ascii_datetime(epoch_seconds):
     # accepts epoch_seconds (integer like this: 1439338816)
     # returns date-time string '%Y-%m-%d %H:%M:%S'
     """
-    return datetime.fromtimestamp(epoch_seconds).strftime('%Y-%m-%d %H:%M:%S')
+    return dt.datetime.fromtimestamp(epoch_seconds).strftime('%Y-%m-%d %H:%M:%S')
 
 # --------------------------------------------------------------
 def ascii_date(epoch_seconds):
@@ -607,7 +606,7 @@ def ascii_date(epoch_seconds):
     # accepts epoch_seconds (integer like this: 1439338816)
     # returns date string '%Y-%m-%d'
     """
-    return datetime.fromtimestamp(epoch_seconds).strftime('%Y-%m-%d')
+    return dt.datetime.fromtimestamp(epoch_seconds).strftime('%Y-%m-%d')
 
 # --------------------------------------------
 def my_days_offset(dt0, days_offset, bus_day_flag=False):
@@ -618,11 +617,11 @@ def my_days_offset(dt0, days_offset, bus_day_flag=False):
     # returns date as type pandas._libs.tslibs.timestamps.Timestamp
     # if bus_day_flag=True, it shifts by business days only
     """
-    dt1 = datetime.date(dt0)                                  # type datetime.date
+    dt1 = dt.datetime.date(dt0)                                  # type datetime.date
     if bus_day_flag:
         dt2 = np.busday_offset(dt1,days_offset,roll='forward')   # type numpy.datetime64
     else:
-        dt2 = dt1 + timedelta(days=days_offset)                  # type datetime.date
+        dt2 = dt1 + dt.timedelta(days=days_offset)                  # type datetime.date
 
     return pd.to_datetime(dt2)                                   # type pandas._libs.tslibs.timestamps.Timestamp
 
