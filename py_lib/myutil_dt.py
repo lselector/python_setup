@@ -63,7 +63,10 @@ def days_in_month(mydate):
     mstart2  = get_next_month(mstart1)          # next month as 'YYYY-MM'
     (y2, m2) = mstart2.split('-')
 
-    return (dt.date(int(y2), int(m2), 1) - date(int(y1), int(m1), 1)).days
+    dt1 = dt.date(int(y1), int(m1), 1)   # year, month, first day
+    dt2 = dt.date(int(y2), int(m2), 1)   # year, month, first day
+    
+    return (dt2-dt1).days
 
 # --------------------------------------------------------------
 def utc_date_to_epoch_secs(date_str='1970-01-01'):
