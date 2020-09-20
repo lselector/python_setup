@@ -37,69 +37,30 @@ def is_ipython():
         return False      # Probably standard Python interpreter
 
 # --------------------------------------------------------------
-def sdf(df, label=""):
+def sdf(df, detail = 1, label=""):
     """
-    # for a pandas DataFrame displays Nrows, Ncols, head(3)
-    """
-    Nrows = len(df)
-    Ncols = len(df.columns)
-    if len(label) >= 1:
-        print(label," : ",end="")
-    print('rows = {:2,d}'.format(Nrows), ', cols = {:2,d}'.format(Ncols))
-    display(df.head(3))
-    print('-' * 50)
-
-# --------------------------------------------------------------
-def sdf0(df, label=""):
-    """
-    # for a pandas DataFrame displays Nrows, Ncols
-    """
-    Nrows = len(df) 
-    Ncols = len(df.columns)
-    if len(label) >= 1:
-        print(label," : ",end="")
-    print('rows = {:2,d}'.format(Nrows), ', cols = {:2,d}'.format(Ncols))
-    print('-' * 50)
-
-# --------------------------------------------------------------
-def sdf1(df, label=""):
-    """
-    # for a pandas DataFrame displays Nrows, Ncols, columns
+    # for a pandas DataFrame displays Nrows, Ncols, 
+    # and more information depending on detail level
+    # Level      Display
+    #   0          Nrows, Ncols, col_names
+    #   1          + head(3) & tail(3) - default
+    #   2          + describe()
     """
     Nrows = len(df)
     Ncols = len(df.columns)
     if len(label) >= 1:
         print(label," : ",end="")
-    print('rows = {:2,d}'.format(Nrows), ', cols = {:2,d}'.format(Ncols), list(df.columns))
-    print('-' * 50)
-
-# --------------------------------------------------------------
-def sdf2(df, label=""):
-    """
-    # for a pandas DataFrame displays Nrows, Ncols, head(3), tail(3)
-    """
-    Nrows = len(df)
-    Ncols = len(df.columns)
-    if len(label) >= 1:
-        print(label," : ",end="")
-    print('rows = {:2,d}'.format(Nrows), ', cols = {:2,d}'.format(Ncols))
-    print("HEAD:")
-    display(df.head(3))
-    print("TAIL:")
-    display(df.tail(3))
-    print('-' * 50)
-
-# --------------------------------------------------------------
-def sdf3(df):
-    """
-    # for a pandas DataFrame displays Nrows, Ncols, head(3), tail(3)
-    # also summary for all columns:
-    #     (count,unique,top,freq,mean,std,min,25%,50%,75%,max)
-    """
-    sdf2(df)
-    print('SUMMARY :')
-    display(df.describe(include='all'))
-    print('*' * 50)
+    print(f"rows = {Nrows:2,d}, cols = {Ncols:2,d}, {list(df.columns)}")
+    if detail >= 1:
+        print("HEAD:")
+        display(df.head(3))
+        print("TAIL:")
+        display(df.tail(3))
+        print('-' * 50)
+    if detail >= 2:
+        print('SUMMARY :')
+        display(df.describe(include='all'))
+        print('*' * 50)
 
 # --------------------------------------------------------------
 def date_time():
