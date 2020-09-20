@@ -82,11 +82,15 @@ def plot_confusion_matrix(cm, mytitle=None, classes=None, saveas=None):
     # cm = metrics.confusion_matrix(y_expected, y_predicted)
     # plot_confusion_matrix(cm, mytitle="Some Title", saveas="SomeImage.png")
     """
+    from mpl_toolkits.axes_grid1.axes_divider import make_axes_locatable
+
     if mytitle == None:
         mytitle = "Confusion Matrix"
     if classes == None:
         classes = ['0','1']
     cmap=plt.cm.Blues
+    if type(cm) == list:
+        cm = np.array(cm)
     cm_orig = cm.copy()
     cm = cm.astype('float') / cm.sum(axis=1)[:, np.newaxis]
 
@@ -111,9 +115,9 @@ def plot_confusion_matrix(cm, mytitle=None, classes=None, saveas=None):
         mytext = str(cm_orig[i, j]) + ' / ' + format(cm[i, j], fmt)
         ax.text(j, i, mytext,
                  horizontalalignment="center",
-                 color="white" if cm[i, j] > thresh else "black",
-                 backgroundcolor="navy" if cm[i, j] > thresh else "aliceblue",
-                 weight="bold"
+                 color="white" if cm[i, j] > thresh else "black"
+                 # , backgroundcolor="navy" if cm[i, j] > thresh else "aliceblue"
+                 # , weight="bold"
                 )
 
     plt.tight_layout()
