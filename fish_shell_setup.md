@@ -148,22 +148,16 @@ FYI. The history file is located here:
 
 Other fish plugins you can install with the package manager
 
-[https://github.com/jorgebucaran/awesome.fish]() 
-
-[https://github.com/jorgebucaran/bax.fish]() -> Run bash commands from fish.
-
-fisher add jorgebucaran/bax.fish
-[https://github.com/joseluisq/gitnow]() -> Fish extensions for git.
+ - [https://github.com/jorgebucaran/awesome.fish]() 
+ - [https://github.com/jorgebucaran/bax.fish]() -> Run bash commands from fish. `fisher add jorgebucaran/bax.fish`
+ - [https://github.com/joseluisq/gitnow]() -> Fish extensions for git.
 
 Docs to visit
 
-Homepage listing various features: [https://fishshell.com/]()
-
-Tutorial: [https://fishshell.com/docs/current/tutorial.html]()
-
-FAQ: [https://fishshell.com/docs/current/faq.html]()
-
-Main Documentation: [https://fishshell.com/docs/current/index.html]()
+ - Homepage listing various features: [https://fishshell.com/]()
+ - Tutorial: [https://fishshell.com/docs/current/tutorial.html]()
+ - FAQ: [https://fishshell.com/docs/current/faq.html]()
+ - Main Documentation: [https://fishshell.com/docs/current/index.html]()
 
 Fish Scripting:
 
@@ -199,14 +193,12 @@ I believe this is done by saving them into:
 
 Scripting docs
 
-Fish functions: [https://fishshell.com/docs/current/index.html#functions]()
+ - Fish functions: [https://fishshell.com/docs/current/index.html#functions]()
+ - Defining aliases: [https://fishshell.com/docs/current/index.html#defining-aliases]()
+ - Autoloading functions (so they are available on startup): [https://fishshell.com/docs/current/index.html#autoloading-functions]()
 
-Defining aliases: [https://fishshell.com/docs/current/index.html#defining-aliases]()
+Other utils that could be fun to install:
 
-Autoloading functions (so they are available on startup): [https://fishshell.com/docs/current/index.html#autoloading-functions]()
-
-
-Other utils that could be fun to install
  - [https://github.com/BurntSushi/ripgrep]()
  - [https://github.com/BurntSushi/xsv]()
  - [https://github.com/sharkdp/bat]() 
@@ -214,4 +206,5 @@ Other utils that could be fun to install
  - [https://github.com/lotabout/skim]() - fzf competitor written in rust. 
 
 Need to play with it. Not clear what major usage differences are at this point.
+
  - [https://github.com/jhawthorn/fzy]() - fzf competitor written in C. Meant to be faster (to be fair, I never had an issue with fzf, but faster is better?) and prefer whole words. (fzf might also do this… it has lots of features)
