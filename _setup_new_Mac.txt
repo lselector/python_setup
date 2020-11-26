@@ -2,7 +2,6 @@ Initial installation
   User account, admin rights, 
   Network access, WiFi, iCloud Account
   MS Office, MS Teams, OneDrive
-
 ========================================================
 Commercial Software minimum set - total ~$234. 
 ========================================================
@@ -180,6 +179,30 @@ MySQL:
   - install MySQL community edition from https://dev.mysql.com/downloads/mysql/ 
   - install MySQL WorkBench community edition from https://dev.mysql.com/downloads/workbench/
 =====================================
+Some good software:
+https://www.youtube.com/watch?v=ROIMJ-M21gM&t=622s
+
+0:00 - start
+0:26 - Adguard - on app store, ad blocker
+2:23 - Alfred
+5:17 - ApolloOne - Photo Video Viewer Editor
+7:58 - PDFpen - adobe acrobat replacement
+9:20 - Setapp (including GoodTask) - $10/mo - https://setapp.com/
+10:54 - balenaEtcher
+11:37 - Elmedia Video Player (free)
+13:42 - Magnet $3 (similar to BetterSnapTool)
+14:55 - Notion - workflow / projects manager
+19:21 - Qobuz - music streamer
+21:00 - iStat Menus - cpu, disk, etc.
+21:49 - Sensei - optimize, uninstall, clean, etc.
+      - AppCleaner (free)
+24:00 - Tot - note taking on iOS, sync to Mac, $20
+25:11 - Spark - email app, Spark for teams
+28:10 - Unarchiver
+28:54 - Ulysses - writing app , good to gather research
+31:27 - Mactracker - track apple devices
+32:34 - end
+
 =====================================
 =====================================
 
