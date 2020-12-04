@@ -61,27 +61,29 @@ from https://github.com/wonderyue/Go2ShellAppleScript
 
 ==================================================
 tell application "Finder"
-  set pathList to (quoted form of POSIX path of (folder of the front window as alias))
+    set pathList to (quoted form of POSIX path of (folder of the front window as alias))
 end tell
 
 tell application "System Events"
-  if not (exists (processes where name is "iTerm2")) then
-    do shell script "open -a iTerm " & pathList
-  else
-    tell application "iTerm"
-      if (count of windows) is 0 then
+    if not (exists (processes where name is "iTerm")) then
         do shell script "open -a iTerm " & pathList
-      else
-        activate
-        tell current session of current window
-          write text "cd " & pathList
+    else
+        tell application "iTerm"
+            activate
+            
+            set aWindow to current window
+            tell aWindow
+                set t to (create tab with default profile)
+            end tell
+            
+            tell current session of aWindow
+                write text "cd " & pathList & ";clear;"
+            end tell
+            
         end tell
-      end if
-    end tell
-  end if
+        
+    end if
 end tell
-
-
 ==================================================
 Note - previously I used iTerm opening script from here:
     http://peterdowns.com/posts/open-iterm-finder-service.html
