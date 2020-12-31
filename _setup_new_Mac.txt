@@ -51,8 +51,10 @@ Battery Health (or paid version 2 or 3) from FIBLAB - show battery health
   https://itunes.apple.com/us/app/battery-health-2-stats-info/id1120214373?mt=12
 Intel Power Gadget
   https://software.intel.com/en-us/articles/intel-power-gadget/
-nteract - viewer for Jupyter files
-  https://nteract.io/
+Jupyter Notebook Viewer - really good
+  https://github.com/tuxu/nbviewer-app/
+# nteract - viewer for Jupyter files
+#   https://nteract.io/
 FileZilla - FTP app
   https://filezilla-project.org/download.php?platform=osx
 Blackmagic Disk Speed Test
