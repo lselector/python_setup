@@ -2,7 +2,8 @@
 # --------------------------------------------------------------
 # speedtest_log.py - by Lev Selector
 # Utility to monitor internet speed on a Mac.
-# Every 10 min refreshes image ~/Desktop/sptest.png
+# Every 10 min refreshes image $HOME/internet_speed_test/sptest.png
+# 
 # 
 # To make it work:
 #   create directory $HOME/internet_speed_test/
@@ -12,10 +13,12 @@
 #      speedtest.log
 #      speedtest.ipynb
 # 
+# cd ~/Desktop
+# ln -s /Users/levselector/internet_speed_test/sptest.png sptest.png
+
 # Note: the jupyter notebook helps to debug code
 # (in case some libraries are missing).
-#      
-# 
+#
 # Then add the following entry to the crontab:
 # 
 # # run internet speed test every 10 min
@@ -39,7 +42,8 @@ register_matplotlib_converters()
 
 SPEEDTEST_CMD = './speedtest.py'
 LOG_FILE      = 'speedtest.log'
-IMG_FILE      = os.getenv('HOME') + '/Desktop/sptest.png'
+ERR_FILE      = 'speedtest.err'
+IMG_FILE      = os.getenv('HOME') + '/internet_speed_test/sptest.png'
 
 # --------------------------------------------------------------
 def setup_logging():
@@ -148,6 +152,9 @@ def main():
     # ------------------------------------------
     # shorten the log file - keep only last 2,000 rows
     MYCMD = f"""echo "$(tail -2000 {LOG_FILE})" > {LOG_FILE}"""
+    os.system(MYCMD)
+    # shorten the err file - keep only last 2,000 rows
+    MYCMD = f"""echo "$(tail -2000 {ERR_FILE})" > {ERR_FILE}"""
     os.system(MYCMD)
 
     # ------------------------------------------
