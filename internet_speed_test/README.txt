@@ -19,6 +19,9 @@ Then add the following entry to the crontab:
 # run internet speed test every 10 min
 */10 * * * * bash -c 'cd ~/; source .bashrc; cd ~/internet_speed_test; python speedtest_log.py >> speedtest.err 2>&1'
 
+# create a link to show image on Desktop
+cd ~/Desktop
+ln -s $HOME/internet_speed_test/sptest.png sptest.png
 
 Note - the original code:
     https://www.accelebrate.com/blog/pandas-bandwidth-python-tutorial-plotting-results-internet-speed-tests/

@@ -116,6 +116,10 @@ Homebrew:
 
 /usr/bin/ruby -e "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/master/install)"
 
+Note: if you are getting error "Permission denied @rb_file_s_symlink"
+then run command:
+   sudo chown -R $(whoami) $(brew --prefix)/*
+
 brew install htop wget grep vim git
 brew install fzf fd ripgrep bat exa
 
